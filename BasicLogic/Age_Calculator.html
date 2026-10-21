@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314B8A6'%3E%3Cpath d='M10.83 5a3.001 3.001 0 0 0-5.66 0H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17ZM4 11h9.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-1.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 1 1 0-2Zm1.17 6H4a1 1 0 1 0 0 2h1.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-9.17a3.001 3.001 0 0 0-5.66 0Z'/%3E%3C/svg%3E"
+  />
+    <title>Age Calculator</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #022534;
+        color: #a0bacc;
+        min-height: 100vh;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .backHome{
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        border-color: #a0bacc;
+        width: max-content;
+      }
+
+      a {
+        color: #a0bacc;
+        text-decoration: none;
+      }
+
+      .container {
+        background: q;
+        border: 2px solid #a0bacc;
+        border-radius: 10px;
+        text-align: center;
+        padding: 40px;
+        width: 100%;
+        max-width: 550px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: aliceblue;
+        margin: 0 0 20px;
+      }
+
+      input[type="date"] {
+        background: #a0bacc;
+        color: #022534;
+        padding: 12px 15px;
+        margin: 20px 0;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        border: 2px solid #022534;
+        outline: none;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      button {
+        color: #a0bacc;
+        background: #022534;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        border: 2px solid #000;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background: #064052;
+      }
+
+      .age {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        padding: 20px 0 0;
+        flex-wrap: wrap;
+      }
+
+      .ageBox {
+        border: 2px solid #022534;
+        padding: 20px 10px;
+        border-radius: 10px;
+        flex: 1 1 100px;
+        min-width: 0;
+      }
+
+      h2 {
+        color: aliceblue;
+        font-size: 2.5rem;
+        font-weight: normal;
+      }
+
+      .error {
+        color: #f76969;
+        padding-top: 20px;
+        overflow-wrap: anywhere;
+      }
+
+      /* Tablet: 768px - 1023px */
+      @media (max-width: 1023px) {
+        .container {
+          max-width: 500px;
+          padding: 30px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .ageBox {
+          padding: 16px 8px;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+      }
+
+      /* Mobile: up to 767px */
+      @media (max-width: 767px) {
+        body {
+          padding: 15px;
+        }
+
+        .container {
+          padding: 24px 18px;
+          border-radius: 10px;
+        }
+
+        h1 {
+          font-size: 1.7rem;
+          margin-bottom: 15px;
+        }
+
+        input[type="date"] {
+          font-size: 1rem;
+          padding: 10px;
+          margin: 15px 0;
+        }
+
+        button {
+          font-size: 1rem;
+          padding: 12px;
+        }
+
+        .age {
+          gap: 8px;
+          padding-top: 15px;
+        }
+
+        .ageBox {
+          flex: 1 1 65px;
+          padding: 14px 5px;
+        }
+
+        h2 {
+          font-size: 1.7rem;
+        }
+
+        .error {
+          padding-top: 15px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Small mobile: up to 374px */
+      @media (max-width: 374px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 20px 12px;
+        }
+
+        h1 {
+          font-size: 1.45rem;
+        }
+
+        .age {
+          gap: 5px;
+        }
+
+        .ageBox {
+          flex-basis: 60px;
+          padding: 12px 3px;
+        }
+
+        h2 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <button class="backHome"><a href="/Main/Dashboard.html">← Back to Home</a></button>
+      <div class="container">
+        <h1>Age Calculator</h1>
+        <p>Enter your Birth Date and get your current age.</p>
+
+        <input
+          type="date"
+          name="birthDate"
+          id="birthDate"
+          aria-label="Birth Date"
+        />
+        <button onclick="calculateAge()">Calculate Age</button>
+
+        <div class="result">
+          <div class="age">
+            <div class="ageBox">
+              <h2 class="yr">00</h2>
+              <span>Years</span>
+            </div>
+            <div class="ageBox">
+              <h2 class="mn">00</h2>
+              <span>Months</span>
+            </div>
+            <div class="ageBox">
+              <h2 class="dy">00</h2>
+              <span>Days</span>
+            </div>
+          </div>
+        </div>
+        <div class="error"></div>
+      </div>
+    </main>
+  </body>
+  <script>
+    function calculateAge() {
+      const input = document.querySelector("input").value;
+      const result = document.querySelector(".result");
+      const error = document.querySelector(".error");
+
+      result.style.display = "none";
+      error.textContent = "";
+
+      if (!input) {
+        error.textContent = "Please Select Your Birth Date !!";
+        return;
+      }
+
+      let [year, month, day] = input.split("-").map(Number);
+
+      let birthDate = new Date(year, month - 1, day);
+      let today = new Date();
+
+      birthDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      if (
+        birthDate.getFullYear() !== year ||
+        birthDate.getMonth() !== month - 1 ||
+        birthDate.getDate() !== day ||
+        birthDate > today
+      ) {
+        error.textContent = "Please Select Valid Date !!";
+        return;
+      }
+
+      let Years = today.getFullYear() - year;
+      let Months = today.getMonth() - (month - 1);
+      let Day = today.getDate() - day;
+
+      if (Months < 0) {
+        Years--;
+        Months += 12;
+      }
+
+      if (Day < 0) {
+        Months--;
+
+        let PrevMonthDays = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          0
+        ).getDate();
+        Day += PrevMonthDays;
+      }
+
+      document.querySelector(".yr").textContent = Years;
+      document.querySelector(".mn").textContent = Months;
+      document.querySelector(".dy").textContent = Day;
+      result.style.display = "block";
+    }
+
+    const today = new Date();
+    const localToday = [
+      String(today.getFullYear()),
+      String(today.getMonth() + 1).padStart(2, "0"),
+      String(today.getDate()).padStart(2, "0"),
+    ].join("-");
+
+    document.querySelector("input").max = localToday;
+  </script>
+</html>

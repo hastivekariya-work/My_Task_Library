@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Tasks Library</title>
+
+    <style>
+      :root {
+        --light-blue: #a0bacc;
+        --dark-blue: #022534;
+        --teal-blue: #064052;
+        --white: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: var(--light-blue);
+        color: var(--dark-blue);
+        min-height: 100vh;
+      }
+
+      header {
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 30px 20px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 32px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        color: var(--light-blue);
+        font-size: 15px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 35px auto;
+        padding: 0 20px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+        border-left: 5px solid var(--teal-blue);
+        padding-left: 12px;
+      }
+
+      .category {
+        background-color: var(--white);
+        margin-bottom: 30px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(2, 37, 52, 0.12);
+      }
+
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--light-blue);
+      }
+
+      .category-icon {
+        font-size: 30px;
+      }
+
+      .category-header h2 {
+        color: var(--teal-blue);
+        font-size: 22px;
+      }
+
+      .task-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .task-card {
+        background-color: var(--light-blue);
+        border-radius: 10px;
+        padding: 20px;
+        border: 1px solid transparent;
+        transition: 0.3s ease;
+      }
+
+      .task-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--teal-blue);
+        box-shadow: 0 6px 14px rgba(2, 37, 52, 0.15);
+      }
+
+      .task-number {
+        display: inline-block;
+        background-color: var(--teal-blue);
+        color: var(--white);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+
+      .task-card h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: var(--dark-blue);
+      }
+
+      .task-card p {
+        color: var(--teal-blue);
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 18px;
+      }
+
+      .task-link {
+        display: inline-block;
+        text-decoration: none;
+        background-color: var(--dark-blue);
+        color: var(--white);
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .task-link:hover {
+        background-color: var(--teal-blue);
+      }
+
+      .task-link:focus-visible {
+        outline: 3px solid var(--teal-blue);
+        outline-offset: 3px;
+      }
+
+      footer {
+        background-color: var(--dark-blue);
+        color: var(--light-blue);
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        font-size: 14px;
+      }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 25px;
+        }
+
+        .container {
+          margin: 25px auto;
+          padding: 0 14px;
+        }
+
+        .category {
+          padding: 18px;
+        }
+
+        .task-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>MY TASKS LIBRARY</h1>
+      <p>Learn, Practice and Improve Your Web Development Skills</p>
+    </header>
+
+    <main class="container">
+      <h2 class="section-title">My Categories</h2>
+
+      <div id="taskContainer"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 My Tasks Library | Keep Learning 🚀</p>
+    </footer>
+
+    <script>
+      async function loadTasks() {
+        const taskContainer = document.getElementById("taskContainer");
+
+        try {
+          const response = await fetch("./tasks.json");
+
+          if (!response.ok) {
+            throw new Error(
+              `Failed to load tasks.json (HTTP ${response.status})`
+            );
+          }
+
+          const data = await response.json();
+
+          if (!data || !Array.isArray(data.categories)) {
+            throw new Error("tasks.json must contain a categories array.");
+          }
+
+          displayTasks(data);
+        } catch (error) {
+          console.error("Error loading tasks:", error);
+          taskContainer.textContent = error.message;
+        }
+      }
+
+      function displayTasks(data) {
+        const taskContainer = document.getElementById("taskContainer");
+        taskContainer.innerHTML = "";
+
+        data.categories.forEach((category) => {
+          const section = document.createElement("section");
+          section.className = "category";
+          section.id = category.id || "";
+
+          const header = document.createElement("div");
+          header.className = "category-header";
+
+          const icon = document.createElement("span");
+          icon.className = "category-icon";
+
+          if (category.icon?.startsWith("svg:")) {
+            const img = document.createElement("img");
+
+            img.src = category.icon.slice(4);
+            img.alt = `${category.name} icon`;
+            img.width = 24;
+            img.height = 24;
+
+            img.onerror = () => {
+              console.error("Failed to load icon:", img.src);
+              icon.textContent = "⚠️";
+            };
+
+            icon.appendChild(img);
+          } else {
+            icon.textContent = category.icon || "";
+          }
+
+          const heading = document.createElement("h2");
+          heading.textContent = category.name || "";
+
+          header.append(icon, heading);
+
+          const list = document.createElement("div");
+          list.className = "task-list";
+
+          (category.tasks || []).forEach((task, index) => {
+            const card = document.createElement("article");
+            card.className = "task-card";
+
+            const number = document.createElement("span");
+            number.className = "task-number";
+            number.textContent = `Task ${index + 1}`;
+
+            const title = document.createElement("h3");
+            title.textContent = task.title || "";
+
+            const description = document.createElement("p");
+            description.textContent = task.description || "";
+
+            const link = document.createElement("a");
+            link.className = "task-link";
+            link.href = task.url || "#";
+            link.textContent = "Open Task →";
+            link.setAttribute("aria-label", `Open ${task.title || "task"}`);
+
+            card.append(number, title, description, link);
+            list.appendChild(card);
+          });
+
+          section.append(header, list);
+          taskContainer.appendChild(section);
+        });
+      }
+
+      loadTasks();
+    </script>
+  </body>
+</html>

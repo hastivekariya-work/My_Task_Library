@@ -1,0 +1,56 @@
+
+{
+  "categories": [
+    {
+      "id": "basicLogic",
+      "name": "Basic Logic",
+      "icon": "svg:icons/basic-logic.svg",
+      "tasks": [
+        {
+          "title": "Age Calculator",
+          "description": "An Age Calculator is a tool that calculates a person's exact age in years, months, and days using their date of birth and the current date.",
+          "url": "BasicLogic/Age_Calculator.html"
+        },
+        {
+          "title": "Even Odd Checker",
+          "description": "An Even-Odd Checker is a program that checks whether a given number is even or odd. A number divisible by 2 is even; otherwise, it is odd.",
+          "url": "BasicLogic/Even_Odd_Checker.html"
+        }
+      ]
+    },
+    {
+      "id": "StringsArrays",
+      "name": "Strings and Arrays",
+      "icon": "svg:icons/strings-array.svg",
+      "tasks": [
+        {
+          "title": "CSS Basics",
+          "description": "Learn colors and styling",
+          "url": "css/task1.html"
+        },
+        {
+          "title": "CSS Layout",
+          "description": "Practice layouts",
+          "url": "css/task2.html"
+        }
+      ]
+    },
+    {
+      "id": "interactiveUI",
+      "name": "Interactive UI",
+      "icon": "svg:icons/interactive-ui.svg",
+      "tasks": [
+        {
+          "title": "JS Basics",
+          "description": "Learn JavaScript",
+          "url": "js/task1.html"
+        },
+        {
+          "title": "JS Counter",
+          "description": "Build a counter",
+          "url": "js/task2.html"
+        }
+      ]
+    }
+  ]
+}
