@@ -15,6 +15,16 @@
           "title": "Even Odd Checker",
           "description": "An Even-Odd Checker is a program that checks whether a given number is even or odd. A number divisible by 2 is even; otherwise, it is odd.",
           "url": "BasicLogic/Even_Odd_Checker.html"
+        },
+        {
+          "title": "Positive Negative Checker",
+          "description": "The Positive Negative Checker identifies whether a number is positive, negative, or zero using HTML, CSS, and JavaScript.",
+          "url": "BasicLogic/Positive_Negative_checker.html"
+        },
+        {
+          "title": "Max of 3 Number",
+          "description": "The Largest of 3 Numbers task identifies the largest among three entered numbers using HTML, CSS, and JavaScript.",
+          "url": "BasicLogic/Largest_of_3_num.html"
         }
       ]
     },

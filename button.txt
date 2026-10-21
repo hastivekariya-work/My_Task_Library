@@ -1,0 +1,19 @@
+.backHome{
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        border-color: #a0bacc;
+        width: max-content;
+      }
+
+
+      a {
+        color: #a0bacc;
+        text-decoration: none;
+      }
+
+
+
+      <button class="backHome"><a href="/Main/Dashboard.html">← Back to Home</a></button>
+

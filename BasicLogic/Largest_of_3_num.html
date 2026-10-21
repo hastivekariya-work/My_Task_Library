@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314B8A6'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5v4h4v2h-4v4h-2v-4H7v-2h4V7h2Z'/%3E%3C/svg%3E"
+    />
+
+    <title>Largest of 3 Numbers</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #022534;
+        color: #a0bacc;
+        min-height: 100vh;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      main {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .backHome {
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        border-color: #a0bacc;
+        width: max-content;
+      }
+
+      a {
+        color: #a0bacc;
+        text-decoration: none;
+      }
+
+      .container {
+        background: #08546c;
+        border: 2px solid #a0bacc;
+        border-radius: 10px;
+        text-align: center;
+        padding: 40px;
+        width: 100%;
+        max-width: 550px;
+        box-shadow: none;
+        transition: none;
+      }
+
+      .container:hover {
+        box-shadow: none;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        color: aliceblue;
+        margin: 0 0 18px;
+        letter-spacing: normal;
+      }
+
+      p {
+        line-height: 1.7;
+        color: #a0bacc;
+      }
+
+      input[type="number"] {
+        background: #a0bacc;
+        color: #022534;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        border: 2px solid #022534;
+        outline: none;
+        width: 100%;
+        max-width: 100%;
+        transition: border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      input[type="number"]::placeholder {
+        color: #405d6d;
+      }
+
+      input[type="number"]:focus {
+        border-color: #a0bacc;
+        box-shadow: 0 0 0 3px rgba(160, 186, 204, 0.2);
+      }
+
+      button {
+        color: #a0bacc;
+        background: #022534;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: normal;
+        border: 2px solid #000;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      button:hover {
+        background: #064052;
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      button:focus-visible {
+        outline: 3px solid aliceblue;
+        outline-offset: 3px;
+      }
+
+      .box {
+        display: none;
+        gap: 12px;
+        padding: 20px 0 0;
+        animation: fadeIn 0.35s ease;
+        flex-wrap: wrap;
+      }
+
+      .resultBox {
+        background: transparent;
+        border: 2px solid #022534;
+        padding: 20px 10px;
+        border-radius: 10px;
+        flex: 1 1 100px;
+        min-width: 0;
+      }
+
+      h2 {
+        color: #022534;
+        font-size: 1.35rem;
+        font-weight: 600;
+        line-height: 1.7;
+      }
+
+      h2 span {
+        display: inline-block;
+        color: aliceblue;
+        font-weight: normal;
+        margin-left: 5px;
+        overflow-wrap: anywhere;
+      }
+
+      .hint {
+        color: #a0bacc;
+        font-size: 0.95rem;
+      }
+
+      .footer {
+        color: #a0bacc;
+        font-size: 0.8rem;
+        letter-spacing: 0.4px;
+      }
+
+      .error {
+        color: #f76969;
+        padding-top: 15px;
+        overflow-wrap: anywhere;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Tablet: 768px–1023px */
+      @media (max-width: 1023px) {
+        .container {
+          max-width: 500px;
+          padding: 30px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .resultBox {
+          padding: 16px 8px;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+        }
+      }
+
+      /* Mobile: up to 767px */
+      @media (max-width: 767px) {
+        body {
+          padding: 15px;
+        }
+
+        .container {
+          padding: 24px 18px;
+          border-radius: 10px;
+        }
+
+        h1 {
+          font-size: 1.7rem;
+          margin-bottom: 15px;
+        }
+
+        input[type="number"] {
+          font-size: 1rem;
+          padding: 10px;
+          margin: 8px 0;
+        }
+
+        button {
+          font-size: 1rem;
+          padding: 12px;
+        }
+
+        .backHome {
+          margin: 10px;
+          font-size: 0.85rem;
+          padding: 8px;
+        }
+
+        .box {
+          gap: 8px;
+          padding-top: 15px;
+        }
+
+        .resultBox {
+          flex: 1 1 65px;
+          padding: 14px 5px;
+        }
+
+        h2 {
+          font-size: 1.1rem;
+        }
+
+        .hint {
+          font-size: 0.88rem;
+        }
+
+        .error {
+          padding-top: 15px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Small mobile: up to 374px */
+      @media (max-width: 374px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 20px 12px;
+        }
+
+        h1 {
+          font-size: 1.45rem;
+        }
+
+        .box {
+          gap: 5px;
+        }
+
+        .resultBox {
+          flex-basis: 60px;
+          padding: 12px 3px;
+        }
+
+        h2 {
+          font-size: 1rem;
+        }
+
+        .footer {
+          font-size: 0.72rem;
+        }
+      }
+
+      /* Reduced motion accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <button class="backHome" type="button">
+        <a href="/Dashboard.html">← Back to Home</a>
+      </button>
+
+      <div class="container">
+        <h1>Largest of 3 Numbers</h1>
+
+        <p>Enter three numbers to find the largest number.</p>
+
+        <input
+          type="number"
+          id="number1"
+          placeholder="Enter First Number"
+          aria-label="First number"
+          step="any"
+        />
+
+        <input
+          type="number"
+          id="number2"
+          placeholder="Enter Second Number"
+          aria-label="Second number"
+          step="any"
+        />
+
+        <input
+          type="number"
+          id="number3"
+          placeholder="Enter Third Number"
+          aria-label="Third number"
+          step="any"
+        />
+
+        <button type="button" onclick="findLargest()">
+          Find Largest Number
+        </button>
+
+        <div class="error" role="alert" aria-live="polite"></div>
+
+        <div class="box" aria-live="polite">
+          <div class="resultBox">
+            <h2>Largest Number: <span class="result"></span></h2>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top: 2em">
+          Enter any three numbers.<br />
+          The largest number will be displayed below.
+        </p>
+
+        <div class="footer" style="margin-top: 2em; color: #022534">
+          Largest of 3 Numbers &copy; 2026
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function findLargest() {
+        const input1 = document.getElementById("number1");
+        const input2 = document.getElementById("number2");
+        const input3 = document.getElementById("number3");
+
+        const result = document.querySelector(".result");
+        const box = document.querySelector(".box");
+        const error = document.querySelector(".error");
+
+        const values = [
+          input1.value.trim(),
+          input2.value.trim(),
+          input3.value.trim()
+        ];
+
+        // Validate empty inputs
+        if (values.some(value => value === "")) {
+          error.textContent = "Please enter all three numbers!";
+          box.style.display = "none";
+
+          const emptyInput = [input1, input2, input3].find(
+            input => input.value.trim() === ""
+          );
+
+          emptyInput.focus();
+          return;
+        }
+
+        const numbers = values.map(Number);
+
+        // Validate numbers
+        if (!numbers.every(Number.isFinite)) {
+          error.textContent = "Please enter valid numbers!";
+          box.style.display = "none";
+          return;
+        }
+
+        // Clear previous errors
+        error.textContent = "";
+
+        // Find the largest number
+        const largest = Math.max(...numbers);
+
+        result.textContent = largest;
+        box.style.display = "flex";
+      }
+
+      // Allow Enter key to calculate the result
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            findLargest();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
